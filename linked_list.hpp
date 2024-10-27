@@ -1,5 +1,14 @@
+#ifndef LINKED_LIST_HPP
+#define LINKED_LIST_HPP
+
 #include<bits/stdc++.h>
 using namespace std;
+
+class hasId {
+public:
+    virtual int getId() const = 0;
+    virtual ~hasId() {}
+};
 
 template<typename data_type>
 struct _node {
@@ -11,10 +20,11 @@ struct _node {
         if (link != nullptr)
             delete link;
     }
+    data_type operator*() { return data; }
 };
 
 template<typename s_data_type>
-struct linked_list {    
+struct linked_list {
 public:
     typedef _node<s_data_type> node;
     typedef s_data_type dt;
@@ -82,7 +92,7 @@ public:
     auto print() noexcept -> enable_if<check<dt>::value, T>::type {
         std::print("{} ", "{");
         for (linked_list::Iterator iter = begin(); iter != nullptr; iter++) {
-            cout << **iter; cout << (iter->link == nullptr? " ": ", ");
+            cout << **iter; cout << (iter->link == nullptr ? " " : ", ");
         }
         std::print("{}", "}");
     }
@@ -135,6 +145,18 @@ public:
         return -1;
     }
 
+    template<typename T = dt>
+    typename enable_if<is_base_of<hasId, T>::value, int>::type
+        searchById(int id) {
+        int index{};
+        for (linked_list::Iterator iter{ begin() }; iter != nullptr; iter++, index++) {
+            if (iter->data.getId() == id) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
     void del(const dt value) {
         linked_list::Iterator iter{ begin() };
         if (*iter == value) {
@@ -157,4 +179,8 @@ public:
         _size -= indexb;
         end_update();
     }
+
+    bool is_empty() { return (head == nullptr ? true : false); }
 };
+
+#endif

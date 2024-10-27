@@ -14,7 +14,7 @@ public:
     }
     type* deque() {
         if (this->is_empty()) { throw invalid_argument("Queue is Empty"); }
-        type temp = (*this)[0];
+        type* temp = (*this)[0];
         typename linked_list<type>::Iterator iter = this->begin();
         this->head = iter->link;
         return temp;
@@ -29,5 +29,8 @@ public:
         print();
         std::println();
     }
+
     bool is_empty() { return this->linked_list<type>::is_empty(); }
+
+    void clear() { this->linked_list<type>::clear(); }
 };

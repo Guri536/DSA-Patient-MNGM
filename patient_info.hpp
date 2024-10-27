@@ -1,7 +1,8 @@
 #include<bits/stdc++.h>
+#include"linked_list.hpp"
 using namespace std;
 
-struct patient {
+struct patient: public hasId {
     unsigned int pid{};
     string name{};
     unsigned int age{};
@@ -20,7 +21,7 @@ struct patient {
         pid = ++gen_id;
     }
     patient(string p_name, int p_age, int check) :
-        name(p_name), age(p_age){
+        name(p_name), age(p_age) {
         admitted = true;
         pid = ++gen_id;
         file_id = ++gen_file_id;
@@ -28,6 +29,12 @@ struct patient {
 
     void set_admitted() { admitted = true; file_id = ++gen_file_id; }
     void discharge() { admitted = false; }
+
+    void print_info_short() { std::print("ID: {}  Name: {}", pid, name); }
+
+    int getId() const override{
+        return pid;
+    }
 };
 int patient::gen_id = 0;
 int patient::gen_file_id = 1000;

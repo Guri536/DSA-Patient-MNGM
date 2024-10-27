@@ -7,6 +7,7 @@ using namespace std;
 class PMS {
 public:
     m_queue<patient> OPD_CheckIn;
+    m_queue<patient> OPD_CheckOut;
     linked_list<patient> Admitted_Patients;
 
     PMS(){
@@ -19,3 +20,11 @@ public:
         );
     }
 };
+
+bool bool_option(){
+    string opt{};
+    print("Are you sure about this Action (Y or N): ");
+    cin >> opt;
+    if(opt == "Y" || opt == "Yes" || opt == "y"){ return true;}
+    return false;
+}
