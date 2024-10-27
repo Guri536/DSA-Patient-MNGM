@@ -23,7 +23,7 @@ public:
 
 bool bool_option(){
     string opt{};
-    print("Are you sure about this Action (Y or N): ");
+    print("\n\e[1;33mAre you sure about this Action (Y or N):\e[0m ");
     cin >> opt;
     if(opt == "Y" || opt == "Yes" || opt == "y"){ return true;}
     return false;

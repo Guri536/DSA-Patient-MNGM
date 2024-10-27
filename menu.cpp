@@ -46,7 +46,7 @@ int main() {
                 print("\nCheck-In Queue is Empty");
                 break;
             }
-            print("\nSending next Patient: ");
+            print("\nSending next Patient:\n");
             patient temp = *OPD.deque();
             temp.print_info_short();
             Waiting.enque(temp);
@@ -55,15 +55,15 @@ int main() {
 
         case 3: {
             while (!Waiting.is_empty()) {
-                print("Admit this patient?");
+                print("\nAdmit this patient?\n");
                 patient temp = *Waiting.deque();
                 temp.print_info_short();
                 if (bool_option()) {
                     Adm_P.append(temp);
-                    print("Patient Admitted.");
+                    print("\n\nPatient Admitted.");
                 }
-                break;
             }
+            break;
         }
 
         case 4: {
@@ -154,7 +154,7 @@ int main() {
                 print("Discharge, {}, ID: {}?", Adm_P[find]->name, Adm_P[find]->pid);
                 if (bool_option()) {
                     Adm_P.delin(find);
-                    print("Patient Discharged");
+                    print("\n\nPatient Discharged");
                 }
                 break;
             }
