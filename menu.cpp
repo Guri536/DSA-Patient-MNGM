@@ -13,9 +13,12 @@ int main() {
         int opt{};
         window.clear();
         print(
-            "\n\n{}::MENU::\n{}\
-        1. Register New Check-In\n\
-        2. Send next In Check-In Queue\n\
+            "\n\n{}::MENU::\n\n{}\
+        Info: {}Check-In Queue: {}{}\n\
+              {}Check-Out Queue: {}{}\n\
+              Ward Patients: {}\n\n\
+        1. Register New Patient\n\
+        2. Send next Patient to Clinic\n\
         3. Admit from Check-Out Queue\n\
         4. In Queue Patients\n\
         5. Admitted Patients\n\
@@ -23,6 +26,13 @@ int main() {
         {}Enter:{} ",
             window.menu_text(),
             window.normal_text(),
+            (OPD.size() == 0 ? window.success_text() : (OPD.size() < 5 ? window.error_text() : window.warning_text())),
+            OPD.size(),
+            window.normal_text(),
+            (Waiting.size() == 0 ? window.success_text() : window.warning_text()),
+            Waiting.size(),
+            window.normal_text(),
+            Adm_P.size(),
             window.interactive_text(),
             window.interactive_input_text()
         );
@@ -128,8 +138,11 @@ int main() {
                 break;
             }
             case 3: {
-                OPD.clear();
-                print("\nQueue is cleared");
+                if (bool_option()) {
+                    OPD.clear();
+                    print("\n{}Queue is cleared{}",
+                        window.warning_text(), window.normal_text());
+                }
             }
             }
             break;
